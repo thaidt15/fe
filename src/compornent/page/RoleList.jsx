@@ -104,7 +104,7 @@ const RoleList = () => {
             />
           </Modal>
           <List
-            size="small"
+            size="x-small"
             bordered
             dataSource={roles}
             renderItem={(role, index) => (
@@ -116,7 +116,7 @@ const RoleList = () => {
                 </div>
               </List.Item>
             )}
-            style={{ marginTop: '20px', paddingLeft: '40px', paddingRight: '40px' }}
+            style={{ marginTop: '20px', paddingLeft: '170px', paddingRight: '170px', backgroundColor: 'white' }}
           />
         </Content>
         <AppFooter />
