@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AppHeader from '../layout/Header';
 import AppFooter from '../layout/Footer';
 import AppSidebar from '../layout/Sidebar';
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import {
   Layout,
   Button,
@@ -80,48 +81,52 @@ const RoleList = () => {
     });
 };
 
-  return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <AppSidebar />
-      <Layout>
-        <AppHeader />
-        <Content style={{ textAlign: 'left', padding: '20px', paddingLeft: '140px', paddingRight: '140px' }}>
-          <Button type="primary" onClick={showModal}>
-            Add Role
-          </Button>
-          <Modal title="Add Role" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <Input
-              value={newRole}
-              onChange={e => setNewRole(e.target.value)}
-              placeholder="Enter a new role"
-            />
-          </Modal>
-          <Modal title="Edit Role" visible={editModalVisible} onOk={handleEditOk} onCancel={handleEditCancel}>
-            <Input
-              value={editingRole}
-              onChange={e => setEditingRole(e.target.value)}
-              placeholder="Edit role"
-            />
-          </Modal>
-          <List
-            size="x-small"
-            bordered
-            dataSource={roles}
-            renderItem={(role, index) => (
-              <List.Item style={{ justifyContent: 'space-between', display: 'flex' }}>
-                <span style={{ textAlign: 'left' }}>{role.name}</span>
-                <div>
-                  <Button icon={<EditOutlined />} onClick={() => showEditModal(index)} style={{ marginRight: '10px' }} />
-                  <Switch checked={role.enabled} onChange={() => toggleSwitch(index)} />
-                </div>
-              </List.Item>
-            )}
-            style={{ marginTop: '20px', paddingLeft: '170px', paddingRight: '170px', backgroundColor: 'white' }}
-          />
-        </Content>
-        <AppFooter />
+    return (
+      <Layout style={{ minHeight: '100vh' }}>
+          <AppSidebar />
+          <Layout>
+              <AppHeader />
+              <Content style={{ textAlign: 'left', padding: '20px', paddingLeft: '140px', paddingRight: '140px' }}>
+                  <h1>Role Management</h1>
+                  <Button type="primary" onClick={showModal}>
+                      Add Role
+                  </Button>
+                  <Modal title="Add Role" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                      <Input
+                          value={newRole}
+                          onChange={e => setNewRole(e.target.value)}
+                          placeholder="Enter a new role"
+                      />
+                  </Modal>
+                  <Modal title="Edit Role" visible={editModalVisible} onOk={handleEditOk} onCancel={handleEditCancel}>
+                      <Input
+                          value={editingRole}
+                          onChange={e => setEditingRole(e.target.value)}
+                          placeholder="Edit role"
+                      />
+                  </Modal>
+                  <List
+                      size="x-small"
+                      bordered
+                      dataSource={roles}
+                      renderItem={(role, index) => (
+                          <List.Item style={{ justifyContent: 'space-between', display: 'flex' }}>
+                              <span style={{ textAlign: 'left' }}>
+                                  <Link to={`/role-list/${role.name}`}>{role.name}</Link>
+                              </span>
+                              <div>
+                                  <Button icon={<EditOutlined />} onClick={() => showEditModal(index)} style={{ marginRight: '10px' }} />
+                                  <Switch checked={role.enabled} onChange={() => toggleSwitch(index)} />
+                              </div>
+                          </List.Item>
+                      )}
+                      style={{ marginTop: '20px', paddingLeft: '170px', paddingRight: '170px', backgroundColor: 'white' }}
+                  />
+              </Content>
+              <AppFooter />
+          </Layout>
       </Layout>
-    </Layout>
+  
   );
 };
 

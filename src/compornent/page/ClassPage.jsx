@@ -89,7 +89,7 @@ const data = [
         </Space>
       )}
     />
-  </Table>
+  </Table >
         </Content>
         <AppFooter />
       </Layout>

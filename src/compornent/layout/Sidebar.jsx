@@ -67,7 +67,7 @@ const AppSidebar = () => {
         {
             key: '1',
             icon: <UserOutlined />,
-            label: <Link to='login'>Login</Link>,
+            label: <Link to='../login'>Login</Link>,
           
         },
         {
