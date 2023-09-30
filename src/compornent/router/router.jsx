@@ -8,6 +8,7 @@ import RoleList from '../page/RoleList.jsx';
 import CheckList from '../page/Checklist.jsx'; 
 import Milestone from '../page/Milestone.jsx'
 import ClassUser from '../page/ClassUser.jsx'
+import Project_Backlog from '../page/Project_backlog.jsx'
 const MyRoutes = () => { // Rename the component here
   return (
     <Routes>
@@ -18,6 +19,7 @@ const MyRoutes = () => { // Rename the component here
       <Route path="/checklist-list" exact element={<CheckList />} /> 
       <Route path="/milestone" exact element={<Milestone />} /> 
       <Route path="/class-user" exact element={<ClassUser />} /> 
+      <Route path="/project-backlog" exact element={<Project_Backlog />} /> 
     </Routes>
   );
 };

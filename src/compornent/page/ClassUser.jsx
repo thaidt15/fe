@@ -17,10 +17,7 @@ const { Option } = Select;
 
 const ClassUser = () => {
     const [classUser, setClassUsers] = useState([]);
-    const [newClassUser, setNewClassUser] = useState({
-
-
-    });
+    const [newClassUser, setNewClassUser] = useState({});
     const [countdown, setCountdown] = useState('');
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [editingIndex, setEditingIndex] = useState(null);

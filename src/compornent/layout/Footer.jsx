@@ -11,7 +11,7 @@ const AppFooter = () => {
         // Add your styles here
       }}
     >
-      Ant Design ©2023 Created by Ant UED
+      FPT University ©2023
     </Footer>
   );
 };
