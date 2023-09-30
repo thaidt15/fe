@@ -115,6 +115,7 @@ const CheckList = () => {
             <AppSidebar />
             <Layout>
                 <AppHeader />
+                <h1>Check List Management</h1>
                 <Content style={{ textAlign: 'left', padding: '20px', paddingLeft: '140px', paddingRight: '140px' }}>
                     <Button type="primary" onClick={showModal}>
                         Add Check-list

@@ -675,7 +675,13 @@ const Project_Backlog = () => {
                             placeholder="LOC"
                         />
                         <br /><br />
-                       
+                        <Select defaultValue={iterations[0]} onChange={value => setSelectedIteration(value)}>
+                            {iterations.map(iter => (
+                                <Select.Option key={iter} value={iter}>
+                                    {iter}
+                                </Select.Option>
+                            ))}
+                        </Select>
                     </Modal>
                     <Modal
                         title="Edit % Completed"

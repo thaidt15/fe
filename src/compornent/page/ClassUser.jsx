@@ -149,7 +149,7 @@ const ClassUser = () => {
     const deleteItem = index => {
         Modal.confirm({
             title: 'Confirm Delete',
-            content: 'Are you sure you want to delete this User??',
+            content: 'Are you sure you want to delete this User from class??',
             onOk: () => {
                 const UpdateClassUser = [...classUser];
                 UpdateClassUser.splice(index, 1);
@@ -387,41 +387,44 @@ const ClassUser = () => {
 
                 {/* Milestone Modal */}
                 <Modal
-                    title="Set Milestone"
-                    visible={isMilestoneModalVisible}
-                    onOk={handleMilestoneOk}
-                    onCancel={() => setMilestoneModalVisible(false)}
-                >
-                    <Select
-                        value={currentMilestone.iteration}
-                        onChange={(value) =>
-                            setCurrentMilestone({ ...currentMilestone, iteration: value })
-                        }
-                    >
-                        {iterations.map((iter) => (
-                            <Option key={iter.id} value={iter.id}>
-                                {iter.name}
-                            </Option>
-                        ))}
-                    </Select>
+    title="Set Milestone"
+    visible={isMilestoneModalVisible}
+    onOk={handleMilestoneOk}
+    onCancel={() => setMilestoneModalVisible(false)}
+>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <Select
+            value={currentMilestone.iteration}
+            style={{ flex: 1 }}
+            onChange={(value) => setCurrentMilestone({ ...currentMilestone, iteration: value })}
+        >
+            {iterations.map((iter) => (
+                <Option key={iter.id} value={iter.id}>
+                    {iter.name}
+                </Option>
+            ))}
+        </Select>
 
-                    <div>
-                        Start Date:
-                        <input
-                            type="date"
-                            value={currentMilestone.from_date}
-                            onChange={(e) => setCurrentMilestone({ ...currentMilestone, from_date: e.target.value })}
-                        />
-                    </div>
-                    <div>
-                        End Date:
-                        <input
-                            type="date"
-                            value={currentMilestone.to_date}
-                            onChange={(e) => setCurrentMilestone({ ...currentMilestone, to_date: e.target.value })}
-                        />
-                    </div>
-                </Modal>
+        <div style={{ flex: 1 }}>
+            <span>Start Date:</span>
+            <input
+                type="date"
+                value={currentMilestone.from_date}
+                onChange={(e) => setCurrentMilestone({ ...currentMilestone, from_date: e.target.value })}
+            />
+        </div>
+
+        <div style={{ flex: 1 }}>
+            <span>End Date:</span>
+            <input
+                type="date"
+                value={currentMilestone.to_date}
+                onChange={(e) => setCurrentMilestone({ ...currentMilestone, to_date: e.target.value })}
+            />
+        </div>
+    </div>
+</Modal>
+
                 <Content style={{ textAlign: 'left', padding: '20px', paddingLeft: '140px', paddingRight: '140px' }}>
                     <Button type="primary" onClick={showModal}>Add Class User</Button>
                     <Button icon={<DownloadOutlined />} onClick={handleDownload} style={{ marginTop: 16, marginLeft: 16 }}>
@@ -454,7 +457,7 @@ const ClassUser = () => {
                         style={{ marginTop: '20px' }}
                         rowKey="id"
                     />
-                    <Modal title={editingIndex !== null ? "Edit User" : "Add User"} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <Modal title={editingIndex !== null ? "Edit User" : "Add User To Class"} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
 
                         <Select
                             value={newClassUser.roll_number}
@@ -474,7 +477,7 @@ const ClassUser = () => {
                         </Select>
 
 
-                        <InputNumber
+                        {/* <InputNumber
                             value={newClassUser.on_going1}
                             onChange={value => setNewClassUser({ ...newClassUser, on_going1: value })}
                             placeholder="On Going 1"
@@ -508,7 +511,7 @@ const ClassUser = () => {
                             placeholder="Final Grade"
                             style={{ width: '100%', marginTop: '10px' }}
                             disabled
-                        />
+                        /> */}
                         <TextArea
                             value={newClassUser.note}
                             onChange={e => setNewClassUser({ ...newClassUser, note: e.target.value })}
