@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import AppHeader from '../layout/Header';
-import AppFooter from '../layout/Footer';
-import AppSidebar from '../layout/Sidebar';
+import AppHeader from './layout/Header';
+import AppFooter from './layout/Footer';
+import AppSidebar from './layout/Sidebar';
+import { Link } from "react-router-dom";
 import {
     Layout,
     Button,
     Input,
     Table,
     Modal,
-    message
+    message,
+    Breadcrumb
 } from 'antd';
 import { EditOutlined,DeleteOutlined  } from '@ant-design/icons';
 const { TextArea } = Input;
@@ -115,6 +117,20 @@ const CheckList = () => {
             <AppSidebar />
             <Layout>
                 <AppHeader />
+                <Breadcrumb
+                    items={[
+                        {
+                            title: <Link to='../teacher/'>Home</Link>
+                        },
+                        
+                        {
+                            title: 'Project Backlog',
+                        },
+                    ]}
+                    style={{
+                        marginLeft: 140, marginTop: 20
+                    }}
+                />
                 <h1>Check List Management</h1>
                 <Content style={{ textAlign: 'left', padding: '20px', paddingLeft: '140px', paddingRight: '140px' }}>
                     <Button type="primary" onClick={showModal}>

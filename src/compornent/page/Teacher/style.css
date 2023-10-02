@@ -1,0 +1,16 @@
+  .grading-item {
+   
+    margin-bottom: 15px;  /* For spacing between items */
+}
+
+.grading-label {
+   
+    margin-right: 15px;  /* Spacing between the label and the inputs */
+}
+
+.grading-options {
+    
+    display: flex;
+   
+   
+}

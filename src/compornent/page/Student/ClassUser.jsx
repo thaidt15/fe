@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import AppHeader from '../layout/Header';
-import AppFooter from '../layout/Footer';
+import AppHeader from '../../layout/Header';
+import AppFooter from '../../layout/Footer';
 import moment from 'moment';
-import AppSidebar from '../layout/Sidebar';
+import AppSidebar from '../../layout/Sidebar';
 import { saveAs } from 'file-saver';
 import {
     Layout, Table, Button, Modal, Switch, message, Select, InputNumber, Breadcrumb, Upload

@@ -1,0 +1,18 @@
+/* AppSidebar.css */
+
+/* Default styles */
+.sider-container {
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  /* Image size when scrolling */
+  .sider-logo {
+    max-width: 80px; /* Adjust the width as needed */
+    transition: max-width 0.3s ease;
+  }
+  
+  /* Image size when scrolling */
+  .sider-container.scrolled .sider-logo {
+    max-width: 60px; /* Adjust the smaller width as needed */
+  }
