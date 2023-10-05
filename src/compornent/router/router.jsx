@@ -15,11 +15,12 @@ import HODUserList from '../page/HOD/UserList.jsx'
 import HODUserDetails from '../page/HOD/UserDetails.jsx'
 
 import TeacherDashBoard from '../page/Teacher/Dashboard.jsx'
+import TeacherProhjectList from '../page/Teacher/ProjectList.jsx'
 import TeacherCheckList from '../page/Teacher/Checklist.jsx'; 
 import TeacherClassUser from '../page/Teacher/ClassUser.jsx'
 import TeacherProject_Backlog from '../page/Teacher/Project_backlog.jsx'
 import TeacherClass from '../page/Teacher/ClassList.jsx'
-
+import TeacherProjectDetails from'../page/Teacher/ProjectDetails.jsx'
 import TeacherTeamDetails from'../page/Teacher/TeamDetails.jsx'
 
 import StudentClassUser from '../page/Student/ClassUser.jsx'
@@ -44,6 +45,8 @@ const MyRoutes = () => { // Rename the component here
 
       {/* teacher */}
       <Route path="/teacher/" exact element={<TeacherDashBoard />} /> 
+      <Route path="/teacher/project-list" exact element={<TeacherProhjectList />} /> 
+      <Route path="/teacher/project-details" exact element={<TeacherProjectDetails />} /> 
       <Route path="/teacher/checklist-list" exact element={<TeacherCheckList />} /> 
       <Route path="/teacher/class-user" exact element={<TeacherClassUser />} /> 
       <Route path="/teacher/project-backlog" exact element={<TeacherProject_Backlog />} /> 

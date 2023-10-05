@@ -273,9 +273,117 @@ const Project_Backlog = () => {
 
     const columns = [
         {
-            title: 'ID',
+            title: 'STT',
             dataIndex: 'id',
             key: 'id'
+        },
+        {
+            title: 'Feature',
+            dataIndex: 'feature_name',
+            key: 'feature_name',
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+                    return <Input value={editingRecord.feature_name} onChange={(e) => setEditingRecord({ ...editingRecord, feature_name: e.target.value })} />;
+                }
+                return text;
+            }
+        },
+        {
+            title: 'Function',
+            dataIndex: 'function_name',
+            key: 'function_name',
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+                    return <Input value={editingRecord.function_name} onChange={(e) => setEditingRecord({ ...editingRecord, function_name: e.target.value })} />;
+                }
+                return text;
+            }
+        },
+        
+        
+        {
+            title: 'Complexity',
+            dataIndex: 'complexity',
+            key: 'complexity',
+            filters: complexities.map(complexity => ({ text: complexity, value: complexity })),
+            onFilter: (value, record) => record.complexity === value,
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+                    return (
+                        <Select
+                            value={editingRecord.complexity}
+                            onChange={(value) => setEditingRecord({ ...editingRecord, complexity: value })}
+                        >
+                            {complexities.map(cmpx => (
+                                <Select.Option key={cmpx} value={cmpx}>
+                                    {cmpx}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    );
+                }
+                return text;
+            }
+        },
+        {
+            title: 'Actor',
+            dataIndex: 'actor',
+            key: 'actor',
+            filters: [...new Set(checkList.map(item => item.actor))].map(actor => ({ text: actor, value: actor })),
+            onFilter: (value, record) => record.actor === value,
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+                    return <Input value={editingRecord.actor} onChange={(e) => setEditingRecord({ ...editingRecord, actor: e.target.value })} />;
+                }
+                return text;
+            }
+        },
+        {
+            title: 'LOC',
+            dataIndex: 'loc',
+            key: 'loc',
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+
+                    return <Input value={editingRecord.loc} onChange={(e) => setEditingRecord({ ...editingRecord, loc: e.target.value })} />;
+
+                }
+                return text;
+            }
+        },
+        
+        {
+            title: 'Planned Code Iteration',
+            dataIndex: 'planned_code_iteration',
+            key: 'planned_code_iteration',
+            filters: iterations.map(iteration => ({ text: iteration, value: iteration })),
+            onFilter: (value, record) => record.planned_code_iteration === value,
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+                    return (
+                        <Select
+                            value={editingRecord ? editingRecord.planned_code_iteration : text}
+                            onChange={value => {
+                                const newEditingRecord = { ...editingRecord, planned_code_iteration: value };
+                                setEditingRecord(newEditingRecord);
+                            }}
+                        >
+                            {iterations.map(iter => (
+                                <Select.Option key={iter} value={iter}>
+                                    {iter}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    );
+                }
+                return text;
+            }
         },
         {
             title: 'Student Name',
@@ -323,111 +431,9 @@ const Project_Backlog = () => {
                 return text;
             }
         },
-        {
-            title: 'Function Name',
-            dataIndex: 'function_name',
-            key: 'function_name',
-            render: (text, record) => {
-                const editable = isEditing === record.id;
-                if (editable) {
-                    return <Input value={editingRecord.function_name} onChange={(e) => setEditingRecord({ ...editingRecord, function_name: e.target.value })} />;
-                }
-                return text;
-            }
-        },
-        {
-            title: 'Actor',
-            dataIndex: 'actor',
-            key: 'actor',
-            filters: [...new Set(checkList.map(item => item.actor))].map(actor => ({ text: actor, value: actor })),
-            onFilter: (value, record) => record.actor === value,
-            render: (text, record) => {
-                const editable = isEditing === record.id;
-                if (editable) {
-                    return <Input value={editingRecord.actor} onChange={(e) => setEditingRecord({ ...editingRecord, actor: e.target.value })} />;
-                }
-                return text;
-            }
-        },
-        {
-            title: 'Feature Name',
-            dataIndex: 'feature_name',
-            key: 'feature_name',
-            render: (text, record) => {
-                const editable = isEditing === record.id;
-                if (editable) {
-                    return <Input value={editingRecord.feature_name} onChange={(e) => setEditingRecord({ ...editingRecord, feature_name: e.target.value })} />;
-                }
-                return text;
-            }
-        },
-        {
-            title: 'Complexity',
-            dataIndex: 'complexity',
-            key: 'complexity',
-            filters: complexities.map(complexity => ({ text: complexity, value: complexity })),
-            onFilter: (value, record) => record.complexity === value,
-            render: (text, record) => {
-                const editable = isEditing === record.id;
-                if (editable) {
-                    return (
-                        <Select
-                            value={editingRecord.complexity}
-                            onChange={(value) => setEditingRecord({ ...editingRecord, complexity: value })}
-                        >
-                            {complexities.map(cmpx => (
-                                <Select.Option key={cmpx} value={cmpx}>
-                                    {cmpx}
-                                </Select.Option>
-                            ))}
-                        </Select>
-                    );
-                }
-                return text;
-            }
-        },
-        {
-            title: 'LOC',
-            dataIndex: 'loc',
-            key: 'loc',
-            render: (text, record) => {
-                const editable = isEditing === record.id;
-                if (editable) {
-
-                    return <Input value={editingRecord.loc} onChange={(e) => setEditingRecord({ ...editingRecord, loc: e.target.value })} />;
-
-                }
-                return text;
-            }
-        },
-        {
-            title: 'Planned Code Iteration',
-            dataIndex: 'planned_code_iteration',
-            key: 'planned_code_iteration',
-            filters: iterations.map(iteration => ({ text: iteration, value: iteration })),
-            onFilter: (value, record) => record.planned_code_iteration === value,
-            render: (text, record) => {
-                const editable = isEditing === record.id;
-                if (editable) {
-                    return (
-                        <Select
-                            value={editingRecord ? editingRecord.planned_code_iteration : text}
-                            onChange={value => {
-                                const newEditingRecord = { ...editingRecord, planned_code_iteration: value };
-                                setEditingRecord(newEditingRecord);
-                            }}
-                        >
-                            {iterations.map(iter => (
-                                <Select.Option key={iter} value={iter}>
-                                    {iter}
-                                </Select.Option>
-                            ))}
-                        </Select>
-                    );
-                }
-                return text;
-            }
-        },
+        
+        
+        
         {
             title: 'Actual Code Iteration',
             dataIndex: 'actual_code_iteration',
@@ -796,6 +802,7 @@ const Project_Backlog = () => {
                         dataSource={checkList.map((item, index) => ({ ...item, key: index }))}
                         columns={columns}
                         style={{ marginTop: '20px' }}
+                        scroll={{ x: 240 }}
                     />
                 </Content>
                 <AppFooter />

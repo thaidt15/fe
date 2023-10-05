@@ -74,7 +74,7 @@ const AppSidebar = () => {
           {
             key: '4',
             icon: <DropboxOutlined />,
-            label: <Link to='../teacher/user-list'><span style={{float:'left'}}>Project Manager</span></Link>,
+            label: <Link to='../teacher/project-list'><span style={{float:'left'}}>Project Manager</span></Link>,
           },
          
           {

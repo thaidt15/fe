@@ -14,19 +14,84 @@ import {
     Table,
     Input,
     Select,
-    
+    Upload
 } from 'antd';
-import { EditOutlined ,EyeTwoTone} from '@ant-design/icons';
+import { EditOutlined, EyeTwoTone } from '@ant-design/icons';
+const { Dragger } = Upload;
+const props = {
+    name: 'file',
+    multiple: true,
+    action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
+    onChange(info) {
+        const { status } = info.file;
+        if (status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully.`);
+        } else if (status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    },
+    onDrop(e) {
+        console.log('Dropped files', e.dataTransfer.files);
+    },
+};
+
 
 const { Content } = Layout;
 const { Option } = Select;
 
 const ClassList = () => {
-    const [classes, setClasses] = useState([]);
+
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [editingIndex, setEditingIndex] = useState(null);
-    const [trainers, setTrainers] = useState(['SangNV', 'ThangPG', 'SonNT', 'TuanVM', 'HaiNB']); // Fixed trainers for demonstration
+    const [trainers, setTrainers] = useState(['SangNV', 'ThangPD', 'SonNT', 'TuanVM', 'HaiNB']); // Fixed trainers for demonstration
     const [form] = Form.useForm();
+    const sampleClasses = [
+        {
+            id: 1,
+            class_code: 'CS101',
+            trainer_id: 'SangNV',
+            reviewer1: 'ThangPD',
+            reviewer2: 'TuanVM',
+            status: 'active'
+        },
+        {
+            id: 2,
+            class_code: 'CS102',
+            trainer_id: 'ThangPG',
+            reviewer1: 'ThangPD',
+            reviewer2: 'TuanVM',
+
+            status: 'in-active'
+        },
+        {
+            id: 3,
+            class_code: 'CS103',
+            trainer_id: 'SonNT',
+            reviewer1: 'ThangPD',
+            reviewer2: 'TuanVM',
+            status: 'active'
+        },
+        {
+            id: 4,
+            class_code: 'CS104',
+            trainer_id: 'TuanVM',
+            reviewer1: 'ThangPD',
+            reviewer2: 'TuanVM',
+            status: 'active'
+        },
+        {
+            id: 5,
+            class_code: 'CS105',
+            trainer_id: 'HaiNB',
+            reviewer1: 'ThangPD',
+            reviewer2: 'TuanVM',
+            status: 'active'
+        }
+    ];
+    const [classes, setClasses] = useState(sampleClasses);
 
     const toggleStatus = (index) => {
         const currentStatus = classes[index].status;
@@ -106,6 +171,21 @@ const ClassList = () => {
             filters: trainers.map(trainer => ({ text: trainer, value: trainer })),
             onFilter: (value, record) => record.trainer_id === value,
         },
+
+        {
+            title: 'Reviewer 1',
+            dataIndex: 'reviewer1',
+            key: 'reviewer1',
+            filters: trainers.map(trainer => ({ text: trainer, value: trainer })),
+            onFilter: (value, record) => record.reviewer1 === value,
+        },
+        {
+            title: 'Reviewer 2',
+            dataIndex: 'reviewer2',
+            key: 'reviewer2',
+            filters: trainers.map(trainer => ({ text: trainer, value: trainer })),
+            onFilter: (value, record) => record.reviewer2 === value,
+        },
         {
             title: 'Status',
             dataIndex: 'status',
@@ -123,7 +203,7 @@ const ClassList = () => {
             render: (_, record, index) => (
                 <div>
                     <Button icon={<EditOutlined />} onClick={() => showModal('edit', index)} />,
-                  <Link to={'../hod/class-user'} placeholder="Enter weight…"><Button  icon={<EyeTwoTone  />}  /></Link>  
+                    <Link to={'../hod/class-user'} placeholder="Enter weight…"><Button icon={<EyeTwoTone />} /></Link>
                 </div>
 
             )
@@ -181,7 +261,28 @@ const ClassList = () => {
                                     {trainers.map(trainer => <Option key={trainer} value={trainer}>{trainer}</Option>)}
                                 </Select>
                             </Form.Item>
-
+                            <Form.Item name="reviewer1" label="Reviwer 1" rules={[{ required: true, message: 'Please select a Lecturer!' }]}>
+                                <Select
+                                    showSearch
+                                    placeholder="Select a Reviewer 1"
+                                    filterOption={(input, option) =>
+                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {trainers.map(trainer => <Option key={trainer} value={trainer}>{trainer}</Option>)}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="reviewer2" label="Reviwer 2" rules={[{ required: true, message: 'Please select a Lecturer!' }]}>
+                                <Select
+                                    showSearch
+                                    placeholder="Select a Reviewer 2"
+                                    filterOption={(input, option) =>
+                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {trainers.map(trainer => <Option key={trainer} value={trainer}>{trainer}</Option>)}
+                                </Select>
+                            </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit">Submit</Button>
                                 <Button onClick={() => setIsFormVisible(false)} style={{ marginLeft: '10px' }}>Cancel</Button>

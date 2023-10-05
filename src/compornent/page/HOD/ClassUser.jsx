@@ -217,49 +217,8 @@ const ClassUser = () => {
         }
         return '0d:0h:0m:0s';
     };
-    const getCurrentIterationDisplay = () => {
 
-        // If the current iteration has days left, show it
-        const currentIterationId = getCurrentIteration();
-
-        if (currentIterationId === null) {
-            return "All iterations are past"; // Or any other appropriate message
-        }
-
-        if (getTimeLeft(currentIterationId) !== '0d:0h:0m:0s') {
-            return `Iteration ${currentIterationId}: ${countdown} left`;
-        }
-        else if (getTimeLeft(currentIterationId) === '0d:0h:0m:0s' && !milestones[currentIterationId + 1].to_date) {
-            if (currentIterationId - 1 === 0) {
-                return <><span style={{ color: 'red' }}>Please set Milestone </span></>;
-            }
-            else {
-                return <>Iteration {currentIterationId - 1} is  <span style={{ color: 'red' }}>expired</span> Please set milestone for Iteration {currentIterationId}</>;
-            }
-
-
-
-        }
-
-        return '';  // Default, in case none of the above conditions are met
-    };
-
-    const currentIterationId = getCurrentIteration();
-    const calculateDaysExpired = (iterationId) => {
-        const today = moment();
-        const endDate = moment(milestones[iterationId].to_date);
-        return endDate.isBefore(today) ? today.diff(endDate, 'days') : 0;
-    };
-    const expiredDays = currentIterationId ? calculateDaysExpired(currentIterationId) : 0;
-    const getDurationDays = () => {
-        const startDate = new Date(currentMilestone.from_date);
-        const endDate = new Date(currentMilestone.to_date);
-
-        const differenceInTime = endDate - startDate;
-        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-
-        return Math.ceil(differenceInDays);
-    };
+  
     const columns = [
         {
             title: 'ID',
@@ -351,17 +310,7 @@ const ClassUser = () => {
                     }}
                 />
                 <h1>Class User Management</h1>
-                <div style={{ display: 'flex', alignItems: 'center', marginLeft: 600 }}>
-                    {currentIterationId && (
-                        <h3 style={{ marginRight: '10px' }}>
-                            {getCurrentIterationDisplay()}
-                        </h3>
-                    )}
-
-                    Total Duration: {getDurationDays() + 1} days
-                    <Button onClick={showMilestoneModal} style={{ width: 110, marginLeft: '10px' }}>Set Milestone</Button>
-
-                </div>
+        
 
 
                 {/* Milestone Modal */}

@@ -272,9 +272,21 @@ const Project_Backlog = () => {
  
     const columns = [
         {
-            title: 'ID',
+            title: 'STT',
             dataIndex: 'id',
             key: 'id'
+        },
+        {
+            title: 'Feature Name',
+            dataIndex: 'feature_name',
+            key: 'feature_name',
+            render: (text, record) => {
+                const editable = isEditing === record.id;
+                if (editable) {
+                    return <Input value={editingRecord.feature_name} onChange={(e) => setEditingRecord({ ...editingRecord, feature_name: e.target.value })} />;
+                }
+                return text;
+            }
         },
         {
             title: 'Student Name',
@@ -348,18 +360,7 @@ const Project_Backlog = () => {
             return text;
         }
     },
-    {
-        title: 'Feature Name',
-        dataIndex: 'feature_name',
-        key: 'feature_name',
-        render: (text, record) => {
-            const editable = isEditing === record.id;
-            if (editable) {
-                return <Input value={editingRecord.feature_name} onChange={(e) => setEditingRecord({ ...editingRecord, feature_name: e.target.value })} />;
-            }
-            return text;
-        }
-    },
+    
     {
         title: 'Complexity',
         dataIndex: 'complexity',
